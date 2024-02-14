@@ -1,0 +1,40 @@
+name: "Export to itch.io"
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+env:
+  # This should match what's in the export_presets.cfg
+  GODOT_EXECUTABLE_URL: https://downloads.tuxfamily.org/godotengine/4.2.1/Godot_v4.2.1-stable_linux.x86_64.zip
+  GODOT_TEMPLATES_URL: https://downloads.tuxfamily.org/godotengine/4.2.1/Godot_v4.2.1-stable_export_templates.tpz
+  EXPORT_PATH: build/web
+
+jobs:
+  export-html5:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Web Build
+        id: build
+        uses: firebelley/godot-export@v5.2.0
+        with:
+          godot_executable_download_url: ${{ env.GODOT_EXECUTABLE_URL }}
+          godot_export_templates_download_url: ${{ env.GODOT_TEMPLATES_URL }}
+          relative_project_path: ./
+          relative_export_path: ${{ env.EXPORT_PATH }}
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: web
+          path: ${{ env.EXPORT_PATH }}
+      # Upload to itch.io
+      - uses: manleydev/butler-publish-itchio-action@master
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+          CHANNEL: html5
+          ITCH_GAME: ${{ secrets.ITCH_GAME }}
+          ITCH_USER: ${{ secrets.ITCH_USER }}
+          PACKAGE: ${{ env.EXPORT_PATH }}
