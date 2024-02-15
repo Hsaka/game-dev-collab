@@ -20,7 +20,6 @@ script = ExtResource("1_dsw21")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.940336, 0.340248, 0, -0.340248, 0.940336, 0, 2.02609, 2.96219)
-fov = 74.4654
 
 [node name="PhantomCameraHost" type="Node" parent="Camera3D"]
 script = ExtResource("1_x6y7g")
