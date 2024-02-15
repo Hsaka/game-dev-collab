@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
-var SPEED = .3
-var gravity = 0.005
+@export var SPEED = .3
+@export var gravity = 0.005
 
 func attack(area):
 	SPEED = 0
