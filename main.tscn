@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://berorjhyjoyhh"]
+[gd_scene load_steps=7 format=3 uid="uid://berorjhyjoyhh"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_dsw21"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_x6y7g"]
@@ -11,21 +11,17 @@ albedo_color = Color(0, 0.309804, 0.0313726, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_p1xnp"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_4iw5b"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_46lqt"]
-
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_dsw21")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.940336, 0.340248, 0, -0.340248, 0.940336, 0, 2.02609, 2.96219)
+transform = Transform3D(1, 0, 0, 0, 0.87744, 0.479687, 0, -0.479687, 0.87744, 0, 3.30499, 4.49334)
 
 [node name="PhantomCameraHost" type="Node" parent="Camera3D"]
 script = ExtResource("1_x6y7g")
 
 [node name="PhantomCamera3D" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.940336, 0.340248, 0, -0.340248, 0.940336, 0, 2.02609, 2.96219)
+transform = Transform3D(1, 0, 0, 0, 0.87744, 0.479687, 0, -0.479687, 0.87744, 0, 3.30499, 4.49334)
 script = ExtResource("2_15ofh")
 priority_override = false
 priority = 0
@@ -38,13 +34,14 @@ camera_3D_resource = null
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.325601, 0.945507, 0, -0.945507, 0.325601, 0, 3.43095, 8.38231)
+shadow_enabled = true
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.339214, 0.940709, 0, -0.940709, -0.339214, 0, 3.35656, -0.724042)
 light_energy = 7.27
 
 [node name="ground" type="MeshInstance3D" parent="."]
-transform = Transform3D(10, 0, 0, 0, 0.1, 0, 0, 0, 10, 0, 0, 0)
+transform = Transform3D(10, 0, 0, 0, 0.1, 0, 0, 0, 10, 0, 0, -1.22938)
 material_override = SubResource("StandardMaterial3D_ij2mo")
 mesh = SubResource("BoxMesh_qh3k7")
 
@@ -52,15 +49,3 @@ mesh = SubResource("BoxMesh_qh3k7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ground/StaticBody3D"]
 shape = SubResource("BoxShape3D_p1xnp")
-
-[node name="defense" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.79875, 0.332, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="defense"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-shape = SubResource("BoxShape3D_4iw5b")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="defense"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-mesh = SubResource("BoxMesh_46lqt")
-skeleton = NodePath("")
