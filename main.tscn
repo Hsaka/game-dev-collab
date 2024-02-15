@@ -1,85 +1,31 @@
-[gd_scene load_steps=6 format=3 uid="uid://berorjhyjoyhh"]
+[gd_scene load_steps=9 format=3 uid="uid://berorjhyjoyhh"]
 
+[ext_resource type="Script" path="res://main.gd" id="1_dsw21"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_x6y7g"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3D.gd" id="2_15ofh"]
 
-[sub_resource type="Animation" id="Animation_nfshq"]
-resource_name = "box"
-length = 5.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CSGBox3D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 6.28319, 0)]
-}
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ij2mo"]
+albedo_color = Color(0, 0.309804, 0.0313726, 1)
 
-[sub_resource type="Animation" id="Animation_on2l1"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CSGBox3D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
+[sub_resource type="BoxMesh" id="BoxMesh_qh3k7"]
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_0ysyc"]
-_data = {
-"RESET": SubResource("Animation_on2l1"),
-"box": SubResource("Animation_nfshq")
-}
+[sub_resource type="BoxShape3D" id="BoxShape3D_p1xnp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4iw5b"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_46lqt"]
 
 [node name="Node3D" type="Node3D"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-editor_description = ""
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-rotation_edit_mode = 0
-rotation_order = 2
-top_level = false
-visible = true
-visibility_parent = NodePath("")
-script = null
-
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+script = ExtResource("1_dsw21")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.864178, 0.503186, 0, -0.503186, 0.864178, 0, 1.08224, 2.2371)
-fov = 74.6889
+transform = Transform3D(1, 0, 0, 0, 0.940336, 0.340248, 0, -0.340248, 0.940336, 0, 2.02609, 2.96219)
 
 [node name="PhantomCameraHost" type="Node" parent="Camera3D"]
 script = ExtResource("1_x6y7g")
 
 [node name="PhantomCamera3D" type="Node3D" parent="."]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-editor_description = ""
-transform = Transform3D(1, 0, 0, 0, 0.864178, 0.503186, 0, -0.503186, 0.864178, 0, 1.08224, 2.2371)
-rotation_edit_mode = 0
-rotation_order = 2
-top_level = false
-visible = true
-visibility_parent = NodePath("")
+transform = Transform3D(1, 0, 0, 0, 0.940336, 0.340248, 0, -0.340248, 0.940336, 0, 2.02609, 2.96219)
 script = ExtResource("2_15ofh")
 priority_override = false
 priority = 0
@@ -91,13 +37,30 @@ inactive_update_mode = 0
 camera_3D_resource = null
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.325601, 0.945507, 0, -0.945507, 0.325601, 0, 3.43095, 8.38231)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.339214, 0.940709, 0, -0.940709, -0.339214, 0, 3.35656, -0.724042)
 light_energy = 7.27
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_0ysyc")
-}
-autoplay = "box"
+[node name="ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 0.1, 0, 0, 0, 10, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_ij2mo")
+mesh = SubResource("BoxMesh_qh3k7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ground"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ground/StaticBody3D"]
+shape = SubResource("BoxShape3D_p1xnp")
+
+[node name="defense" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.79875, 0.332, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="defense"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+shape = SubResource("BoxShape3D_4iw5b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="defense"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("BoxMesh_46lqt")
+skeleton = NodePath("")
