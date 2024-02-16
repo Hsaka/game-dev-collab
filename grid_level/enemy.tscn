@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bdnybbleqqyyy"]
 
-[ext_resource type="Script" path="res://enemy.gd" id="1_qdtua"]
+[ext_resource type="Script" path="res://grid_level/enemy.gd" id="1_ps7k5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qyn5c"]
 
@@ -13,7 +13,7 @@ size = Vector3(0.901939, 1, 1)
 
 [node name="enemy" type="CharacterBody3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-script = ExtResource("1_qdtua")
+script = ExtResource("1_ps7k5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="enemy"]
 shape = SubResource("CapsuleShape3D_qyn5c")

@@ -1,7 +1,7 @@
 extends Node3D
 
-@export var enemy_scene = preload("res://enemy.tscn")
-@export var defense_scene = preload("res://defense.tscn")
+@export var enemy_scene = preload("res://grid_level/enemy.tscn")
+@export var defense_scene = preload("res://grid_level/defense.tscn")
 @export var rows_count = 7
 @export var rows_thickness = 6.0
 @export var columns_count = 8
@@ -20,6 +20,7 @@ var z_selector = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
 	for index in range(rows_count):
 		rows.append((index * rows_thickness / rows_count) - rows_thickness/2.0)
 		dist_tracker.append(0)
@@ -36,6 +37,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	#$Path3D/PathFollow3D.progress += delta
 	spawn_time += delta
 	if(spawn_time > spawn_timeout):
 		while(dist_tracker[z_selector] != 0):
@@ -48,6 +50,5 @@ func _process(delta):
 				
 		enemy = enemy_scene.instantiate()
 		enemy.position = Vector3(3, 1, rows[z_selector] + randf()*scatter - scatter)
-		print(enemy.position.z)
 		add_child(enemy)
 		spawn_time = 0
