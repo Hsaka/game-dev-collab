@@ -1,7 +1,25 @@
 [gd_scene load_steps=2 format=3 uid="uid://berorjhyjoyhh"]
 
-[ext_resource type="PackedScene" uid="uid://v0jjsyan6tqb" path="res://path_level/path_level.tscn" id="1_jyfa3"]
+[ext_resource type="Script" path="res://level_selector.gd" id="1_psx4r"]
 
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_psx4r")
 
-[node name="path_level" parent="." instance=ExtResource("1_jyfa3")]
+[node name="level" type="Node3D" parent="."]
+
+[node name="path_level" type="Button" parent="."]
+offset_left = 30.0
+offset_top = 24.0
+offset_right = 147.0
+offset_bottom = 98.0
+text = "Path level"
+
+[node name="grid_level" type="Button" parent="."]
+offset_left = 181.0
+offset_top = 24.0
+offset_right = 306.0
+offset_bottom = 99.0
+text = "Grid level"
+
+[connection signal="button_down" from="path_level" to="." method="_on_path_level_2_button_down"]
+[connection signal="button_down" from="grid_level" to="." method="_on_grid_level_button_down"]

@@ -27,7 +27,7 @@ inactive_update_mode = 0
 camera_3D_resource = null
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.339214, 0.940709, 0, -0.940709, -0.339214, 0, 3.35656, -0.724042)
+transform = Transform3D(1, 0, 0, 0, 0.192282, 0.98134, 0, -0.98134, 0.192282, 0, 3.35656, -0.724042)
 light_energy = 7.27
 
 [node name="ground" type="MeshInstance3D" parent="."]

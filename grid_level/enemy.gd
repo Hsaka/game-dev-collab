@@ -21,4 +21,5 @@ func _physics_process(delta):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if(self.global_transform.origin.x < -4.5):
+		get_tree().paused = true
