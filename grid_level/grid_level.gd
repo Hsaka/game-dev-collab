@@ -1,7 +1,7 @@
 extends Node3D
 
 @export var enemy_scene = preload("res://grid_level/enemy.tscn")
-@export var defense_scene = preload("res://grid_level/defense.tscn")
+@export var defense_scene = preload("res://grid_level/defense_spawner.tscn")
 @export var rows_count = 7
 @export var rows_thickness = 6.0
 @export var columns_count = 8
@@ -30,7 +30,7 @@ func _ready():
 			defense = defense_scene.instantiate()
 			defense.position = Vector3(
 				x*columns_thickness/columns_count - (columns_thickness/2.0),
-				-0.14,
+				0.05,
 				z*rows_thickness/rows_count - (rows_thickness/2.0)
 				)
 			add_child(defense)
