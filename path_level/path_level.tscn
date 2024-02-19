@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://v0jjsyan6tqb"]
+[gd_scene load_steps=11 format=3 uid="uid://v0jjsyan6tqb"]
 
 [ext_resource type="Script" path="res://path_level/path_level.gd" id="1_drjvm"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_xs655"]
@@ -13,22 +13,6 @@ _data = {
 }
 point_count = 6
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4xg36"]
-albedo_color = Color(0, 0.568627, 0.117647, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_ujonl"]
-material = SubResource("StandardMaterial3D_4xg36")
-
-[sub_resource type="BoxMesh" id="BoxMesh_0te3y"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jdn6k"]
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_gy8eo"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5y8mk"]
-albedo_color = Color(0, 0, 1, 1)
-
 [sub_resource type="BoxMesh" id="BoxMesh_j33iy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dhga7"]
@@ -39,8 +23,6 @@ albedo_color = Color(0.294118, 0.294118, 0.294118, 1)
 metallic = 0.51
 metallic_specular = 0.78
 roughness = 0.55
-
-[sub_resource type="BoxMesh" id="BoxMesh_uj28y"]
 
 [sub_resource type="Curve3D" id="Curve3D_1r4fn"]
 _data = {
@@ -54,7 +36,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.344551, 0)
 script = ExtResource("1_drjvm")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.88385, 0.25462, -0.392383, 0, 0.83886, 0.544344, 0.467757, -0.481119, 0.741429, 16.1095, 3.00005, -10.1495)
+transform = Transform3D(0.88385, 0.25462, -0.392383, 0, 0.83886, 0.544343, 0.467757, -0.481119, 0.741428, 16.1095, 3.00005, -10.1495)
 
 [node name="PhantomCameraHost" type="Node" parent="Camera3D"]
 script = ExtResource("1_xs655")
@@ -62,34 +44,16 @@ script = ExtResource("1_xs655")
 [node name="enemy_path" type="Path3D" parent="."]
 curve = SubResource("Curve3D_du84n")
 script = ExtResource("3_nujw2")
+path_seed = null
+row_x_value = null
+row_count = null
+road_width = null
 
 [node name="camera_follow" type="PathFollow3D" parent="enemy_path"]
 transform = Transform3D(0.663747, 7.54539e-08, 0.747942, 1.28124e-09, 1, -1.02017e-07, -0.747942, 6.86732e-08, 0.663747, 18.2721, 4.5038e-08, -14.2358)
 progress = 0.892418
 
 [node name="target" type="Node3D" parent="enemy_path/camera_follow"]
-
-[node name="PathFollow3D" type="PathFollow3D" parent="enemy_path"]
-transform = Transform3D(0.663747, 7.54539e-08, 0.747942, 1.28124e-09, 1, -1.02017e-07, -0.747942, 6.86732e-08, 0.663747, 18.2721, 4.5038e-08, -14.2358)
-progress = 0.892418
-
-[node name="Node3D" type="Node3D" parent="enemy_path/PathFollow3D"]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="enemy_path/PathFollow3D/Node3D"]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
-mesh = SubResource("BoxMesh_ujonl")
-
-[node name="start" type="MeshInstance3D" parent="enemy_path"]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 3.14655, 0, -4.03213)
-mesh = SubResource("BoxMesh_0te3y")
-skeleton = NodePath("")
-surface_material_override/0 = SubResource("StandardMaterial3D_jdn6k")
-
-[node name="end" type="MeshInstance3D" parent="enemy_path"]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -3.27653, 0, 1.93861)
-mesh = SubResource("BoxMesh_gy8eo")
-skeleton = NodePath("../start")
-surface_material_override/0 = SubResource("StandardMaterial3D_5y8mk")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.906377, 0.416772, 0.0691446, -0.306559, 0.536215, 0.786444, 0.290692, -0.734012, 0.613779, 21.3892, 5.57267, 1.83407)
@@ -103,8 +67,8 @@ surface_material_override/0 = SubResource("StandardMaterial3D_dhga7")
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.192282, 0.98134, 0, -0.98134, 0.192282, 0, 23.0791, 0.924223)
 light_energy = 7.27
-spot_range = 42.5301
-spot_angle = 36.3063
+spot_range = 67.8702
+spot_angle = 54.1535
 
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.351924, 0)
@@ -121,46 +85,70 @@ path_continuous_u = true
 path_u_distance = 1.0
 path_joined = false
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.12905, 0, 0)
-mesh = SubResource("BoxMesh_uj28y")
-
 [node name="camera_path" type="Path3D" parent="."]
 curve = SubResource("Curve3D_1r4fn")
 script = ExtResource("3_hjnxn")
 
-[node name="PathFollow3D" type="PathFollow3D" parent="camera_path"]
+[node name="close_up_view" type="PathFollow3D" parent="camera_path"]
 transform = Transform3D(0.768218, 0, 0.640179, 0, 0.999998, 0, -0.640178, 0, 0.768218, 16.1095, 3.00005, -10.1495)
 
-[node name="PhantomCamera3D" type="Node3D" parent="camera_path/PathFollow3D"]
-transform = Transform3D(0.379547, 0.503612, -0.776093, 0, 0.838862, 0.544345, 0.925172, -0.206604, 0.318388, 0, 0, 0)
+[node name="camera" type="Node3D" parent="camera_path/close_up_view"]
+
+[node name="PhantomCamera3D" type="Node3D" parent="camera_path/close_up_view/camera"]
+transform = Transform3D(0.379547, 0.503612, -0.776092, 0, 0.838862, 0.544344, 0.925173, -0.206604, 0.318387, 0, 0, 0)
 script = ExtResource("2_xe0q7")
 priority_override = false
 priority = 0
 follow_mode = 0
 look_at_mode = 2
-look_at_target = NodePath("../../../enemy_path/camera_follow/target")
+look_at_target = NodePath("../../../../enemy_path/camera_follow/target")
 look_at_parameters/look_at_target_offset = Vector3(0, 0, 0)
 tween_parameters = null
 tween_on_load = true
 inactive_update_mode = 0
 camera_3D_resource = null
 
-[node name="left" type="Button" parent="camera_path"]
-offset_left = 887.0
-offset_top = 60.0
-offset_right = 987.0
-offset_bottom = 160.0
+[node name="camera_move" type="ItemList" parent="camera_path"]
+offset_left = 27.0
+offset_top = 90.0
+offset_right = 240.0
+offset_bottom = 198.0
+
+[node name="left" type="Button" parent="camera_path/camera_move"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 13.0
+offset_right = 102.0
+offset_bottom = 97.0
 text = "<"
 
-[node name="right" type="Button" parent="camera_path"]
-offset_left = 1015.0
-offset_top = 60.0
-offset_right = 1115.0
-offset_bottom = 160.0
+[node name="right" type="Button" parent="camera_path/camera_move"]
+layout_mode = 0
+offset_left = 115.0
+offset_top = 14.0
+offset_right = 201.0
+offset_bottom = 98.0
 text = ">"
 
-[connection signal="button_down" from="camera_path/left" to="." method="_on_left_button_down"]
-[connection signal="button_up" from="camera_path/left" to="." method="_on_left_button_up"]
-[connection signal="button_down" from="camera_path/right" to="." method="_on_right_button_down"]
-[connection signal="button_up" from="camera_path/right" to="." method="_on_right_button_up"]
+[node name="top_view" type="Node3D" parent="."]
+
+[node name="toggle_view" type="Button" parent="."]
+offset_left = 315.0
+offset_top = 18.0
+offset_right = 437.0
+offset_bottom = 73.0
+text = "toggle view"
+
+[node name="enemy" type="Button" parent="."]
+offset_left = 275.0
+offset_top = 114.0
+offset_right = 334.0
+offset_bottom = 151.0
+text = "Spawn Enemy "
+
+[connection signal="button_down" from="camera_path/camera_move/left" to="." method="_on_left_button_down"]
+[connection signal="button_up" from="camera_path/camera_move/left" to="." method="_on_left_button_up"]
+[connection signal="button_down" from="camera_path/camera_move/right" to="." method="_on_right_button_down"]
+[connection signal="button_up" from="camera_path/camera_move/right" to="." method="_on_right_button_up"]
+[connection signal="pressed" from="toggle_view" to="." method="_on_toggle_view_pressed"]
+[connection signal="pressed" from="enemy" to="enemy_path" method="_on_enemy_pressed"]
