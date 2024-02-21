@@ -6,20 +6,3 @@
 script = ExtResource("1_psx4r")
 
 [node name="level" type="Node3D" parent="."]
-
-[node name="path_level" type="Button" parent="."]
-offset_left = 30.0
-offset_top = 24.0
-offset_right = 147.0
-offset_bottom = 59.0
-text = "Path level"
-
-[node name="grid_level" type="Button" parent="."]
-offset_left = 159.0
-offset_top = 23.0
-offset_right = 284.0
-offset_bottom = 60.0
-text = "Grid level"
-
-[connection signal="button_down" from="path_level" to="." method="_on_path_level_2_button_down"]
-[connection signal="button_down" from="grid_level" to="." method="_on_grid_level_button_down"]

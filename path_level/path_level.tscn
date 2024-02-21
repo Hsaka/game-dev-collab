@@ -1,28 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://v0jjsyan6tqb"]
+[gd_scene load_steps=12 format=3 uid="uid://v0jjsyan6tqb"]
 
 [ext_resource type="Script" path="res://path_level/path_level.gd" id="1_drjvm"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_xs655"]
+[ext_resource type="Texture2D" uid="uid://dhi520mx0c40l" path="res://UI_B.webp" id="2_1w2lv"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3D.gd" id="2_xe0q7"]
 [ext_resource type="Script" path="res://path_level/camera_move.gd" id="3_hjnxn"]
 [ext_resource type="Script" path="res://path_level/enemy_path.gd" id="3_nujw2"]
-
-[sub_resource type="Curve3D" id="Curve3D_du84n"]
-_data = {
-"points": PackedVector3Array(13.1203, 0, 12.2456, -13.1203, 0, -12.2456, 18.932, 0, -13.635, -7.5853, 0, -11.0619, 7.5853, 0, 11.0619, 3.94389, 5.34952e-05, -5.67309, 10.737, 0, 1.607, -10.737, 0, -1.607, -8.98491, 5.34952e-05, 11.4044, -9.451, -1, 0.064, 9.451, 1, -0.064, -8.058, 2.5, -3.651, -2.885, 1, -3.475, 2.885, -1, 3.475, 8.067, 3, 8.496, -6.29467, 0, -0.26228, 6.29467, 0, 0.26228, 19.935, 0, 15.119),
-"tilts": PackedFloat32Array(0, 0, 0, -0.37139, -0.396738, -0.568886)
-}
-point_count = 6
-
-[sub_resource type="BoxMesh" id="BoxMesh_j33iy"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dhga7"]
-albedo_color = Color(0.0117647, 0.235294, 0.00392157, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_somrm"]
-albedo_color = Color(0.294118, 0.294118, 0.294118, 1)
-metallic = 0.51
-metallic_specular = 0.78
-roughness = 0.55
 
 [sub_resource type="Curve3D" id="Curve3D_1r4fn"]
 _data = {
@@ -31,46 +14,181 @@ _data = {
 }
 point_count = 6
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_somrm"]
+albedo_color = Color(0.294118, 0.294118, 0.294118, 1)
+metallic = 0.51
+metallic_specular = 0.78
+roughness = 0.55
+
+[sub_resource type="BoxMesh" id="BoxMesh_j33iy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dhga7"]
+albedo_color = Color(0.0117647, 0.235294, 0.00392157, 1)
+
+[sub_resource type="Curve3D" id="Curve3D_du84n"]
+_data = {
+"points": PackedVector3Array(13.1203, 0, 12.2456, -13.1203, 0, -12.2456, 18.932, 0, -13.635, -7.5853, 0, -11.0619, 7.5853, 0, 11.0619, 3.94389, 5.34952e-05, -5.67309, 10.737, 0, 1.607, -10.737, 0, -1.607, -8.98491, 5.34952e-05, 11.4044, -9.451, -1, 0.064, 9.451, 1, -0.064, -8.058, 2.5, -3.651, -2.885, 1, -3.475, 2.885, -1, 3.475, 8.067, 3, 8.496, -6.29467, 0, -0.26228, 6.29467, 0, 0.26228, 19.935, 0, 15.119),
+"tilts": PackedFloat32Array(0, 0, 0, -0.37139, -0.396738, -0.568886)
+}
+point_count = 6
+
 [node name="path_level" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.344551, 0)
 script = ExtResource("1_drjvm")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.88385, 0.25462, -0.392383, 0, 0.83886, 0.544343, 0.467757, -0.481119, 0.741428, 16.1095, 3.00005, -10.1495)
+[node name="top_right" type="HBoxContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -247.0
+offset_top = 8.0
+offset_right = -35.0
+offset_bottom = 54.0
+grow_horizontal = 0
+size_flags_stretch_ratio = 20.0
+theme_override_constants/separation = 4
+alignment = 1
 
-[node name="PhantomCameraHost" type="Node" parent="Camera3D"]
-script = ExtResource("1_xs655")
+[node name="pause" type="Button" parent="top_right"]
+process_mode = 3
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 20.0
+text = "paus"
 
-[node name="enemy_path" type="Path3D" parent="."]
-curve = SubResource("Curve3D_du84n")
-script = ExtResource("3_nujw2")
-path_seed = null
-row_x_value = null
-row_count = null
-road_width = null
+[node name="remove" type="Button" parent="top_right"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
 
-[node name="camera_follow" type="PathFollow3D" parent="enemy_path"]
-transform = Transform3D(0.663747, 7.54539e-08, 0.747942, 1.28124e-09, 1, -1.02017e-07, -0.747942, 6.86732e-08, 0.663747, 18.2721, 4.5038e-08, -14.2358)
-progress = 0.892418
+[node name="view" type="Button" parent="top_right"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "cam"
 
-[node name="target" type="Node3D" parent="enemy_path/camera_follow"]
+[node name="Button4" type="Button" parent="top_right"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.906377, 0.416772, 0.0691446, -0.306559, 0.536215, 0.786444, 0.290692, -0.734012, 0.613779, 21.3892, 5.57267, 1.83407)
-shadow_enabled = true
+[node name="game" type="Node3D" parent="."]
 
-[node name="ground" type="MeshInstance3D" parent="."]
-transform = Transform3D(40, 0, 0, 0, 1, 0, 0, 0, 40, 0, -0.75, -1.696)
-mesh = SubResource("BoxMesh_j33iy")
-surface_material_override/0 = SubResource("StandardMaterial3D_dhga7")
+[node name="wave" type="RichTextLabel" parent="game"]
+offset_left = 16.0
+offset_top = 5.0
+offset_right = 145.0
+offset_bottom = 60.0
+theme_override_font_sizes/normal_font_size = 40
+text = "WAVE"
+visible_characters = 9
+visible_ratio = 2.25
 
-[node name="SpotLight3D" type="SpotLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.192282, 0.98134, 0, -0.98134, 0.192282, 0, 23.0791, 0.924223)
-light_energy = 7.27
-spot_range = 67.8702
-spot_angle = 54.1535
+[node name="defense_menu_view" type="Button" parent="game"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -49.5
+offset_top = -168.0
+offset_right = 49.5
+offset_bottom = -132.999
+grow_horizontal = 2
+grow_vertical = 0
+text = "hide/show"
 
-[node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
+[node name="defenses" type="HBoxContainer" parent="game"]
+custom_minimum_size = Vector2(0, 90)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -576.0
+offset_top = -116.275
+offset_right = 576.0
+offset_bottom = -26.275
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_stretch_ratio = 20.0
+theme_override_constants/separation = 17
+alignment = 1
+
+[node name="Button1" type="Button" parent="game/defenses"]
+custom_minimum_size = Vector2(105, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 20.0
+
+[node name="Button2" type="Button" parent="game/defenses"]
+custom_minimum_size = Vector2(105, 0)
+layout_mode = 2
+
+[node name="Button3" type="Button" parent="game/defenses"]
+custom_minimum_size = Vector2(105, 0)
+layout_mode = 2
+
+[node name="Button4" type="Button" parent="game/defenses"]
+custom_minimum_size = Vector2(105, 0)
+layout_mode = 2
+
+[node name="Button5" type="Button" parent="game/defenses"]
+custom_minimum_size = Vector2(105, 0)
+layout_mode = 2
+
+[node name="enemy" type="Button" parent="game"]
+offset_left = 275.0
+offset_top = 114.0
+offset_right = 395.0
+offset_bottom = 151.0
+text = "Spawn Enemy 
+(for debuging)"
+
+[node name="top_view" type="Node3D" parent="game"]
+
+[node name="camera_path" type="Path3D" parent="game"]
+curve = SubResource("Curve3D_1r4fn")
+script = ExtResource("3_hjnxn")
+
+[node name="close_up_view" type="PathFollow3D" parent="game/camera_path"]
+transform = Transform3D(0.768218, 0, 0.640179, 0, 0.999998, 0, -0.640178, 0, 0.768218, 16.1095, 3.00005, -10.1495)
+
+[node name="camera" type="Node3D" parent="game/camera_path/close_up_view"]
+
+[node name="PhantomCamera3D" type="Node3D" parent="game/camera_path/close_up_view/camera"]
+transform = Transform3D(0.379547, 0.503612, -0.776092, 0, 0.838862, 0.544344, 0.925173, -0.206604, 0.318387, 0, 0, 0)
+script = ExtResource("2_xe0q7")
+priority_override = false
+priority = 0
+follow_mode = 0
+look_at_mode = 2
+look_at_target = NodePath("../../../../enemy_path/camera_follow/target")
+look_at_parameters/look_at_target_offset = Vector3(0, 0, 0)
+tween_parameters = null
+tween_on_load = true
+inactive_update_mode = 0
+camera_3D_resource = null
+
+[node name="view_move" type="VBoxContainer" parent="game/camera_path"]
+visible = false
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 40.0
+offset_top = -87.0
+offset_right = 134.0
+offset_bottom = 87.0
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="left" type="Button" parent="game/camera_path/view_move"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "<"
+
+[node name="right" type="Button" parent="game/camera_path/view_move"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = ">"
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="game"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.351924, 0)
 material_override = SubResource("StandardMaterial3D_somrm")
 polygon = PackedVector2Array(-1, -0.25, -1, -0.2, 1, -0.2, 1, -0.25)
@@ -85,70 +203,56 @@ path_continuous_u = true
 path_u_distance = 1.0
 path_joined = false
 
-[node name="camera_path" type="Path3D" parent="."]
-curve = SubResource("Curve3D_1r4fn")
-script = ExtResource("3_hjnxn")
+[node name="SpotLight3D" type="SpotLight3D" parent="game"]
+transform = Transform3D(1, 0, 0, 0, 0.192282, 0.98134, 0, -0.98134, 0.192282, 0, 23.0791, 0.924223)
+light_energy = 7.27
+spot_range = 67.8702
+spot_angle = 54.1535
 
-[node name="close_up_view" type="PathFollow3D" parent="camera_path"]
-transform = Transform3D(0.768218, 0, 0.640179, 0, 0.999998, 0, -0.640178, 0, 0.768218, 16.1095, 3.00005, -10.1495)
+[node name="ground" type="MeshInstance3D" parent="game"]
+transform = Transform3D(40, 0, 0, 0, 1, 0, 0, 0, 40, 0, -0.75, -1.696)
+mesh = SubResource("BoxMesh_j33iy")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_dhga7")
 
-[node name="camera" type="Node3D" parent="camera_path/close_up_view"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="game"]
+transform = Transform3D(0.906377, 0.416773, 0.0691446, -0.306559, 0.536215, 0.786444, 0.290692, -0.734012, 0.613779, 21.3892, 5.57267, 1.83407)
+shadow_enabled = true
 
-[node name="PhantomCamera3D" type="Node3D" parent="camera_path/close_up_view/camera"]
-transform = Transform3D(0.379547, 0.503612, -0.776092, 0, 0.838862, 0.544344, 0.925173, -0.206604, 0.318387, 0, 0, 0)
-script = ExtResource("2_xe0q7")
-priority_override = false
-priority = 0
-follow_mode = 0
-look_at_mode = 2
-look_at_target = NodePath("../../../../enemy_path/camera_follow/target")
-look_at_parameters/look_at_target_offset = Vector3(0, 0, 0)
-tween_parameters = null
-tween_on_load = true
-inactive_update_mode = 0
-camera_3D_resource = null
+[node name="enemy_path" type="Path3D" parent="game"]
+curve = SubResource("Curve3D_du84n")
+script = ExtResource("3_nujw2")
+path_seed = null
+row_x_value = null
+row_count = null
+road_width = null
 
-[node name="camera_move" type="ItemList" parent="camera_path"]
-offset_left = 27.0
-offset_top = 90.0
-offset_right = 240.0
-offset_bottom = 198.0
+[node name="camera_follow" type="PathFollow3D" parent="game/enemy_path"]
+transform = Transform3D(0.663747, 7.54539e-08, 0.747942, 1.28124e-09, 1, -1.02017e-07, -0.747942, 6.86732e-08, 0.663747, 18.2721, 4.5038e-08, -14.2358)
+progress = 0.892418
 
-[node name="left" type="Button" parent="camera_path/camera_move"]
-layout_mode = 0
-offset_left = 12.0
-offset_top = 13.0
-offset_right = 102.0
-offset_bottom = 97.0
-text = "<"
+[node name="target" type="Node3D" parent="game/enemy_path/camera_follow"]
 
-[node name="right" type="Button" parent="camera_path/camera_move"]
-layout_mode = 0
-offset_left = 115.0
-offset_top = 14.0
-offset_right = 201.0
-offset_bottom = 98.0
-text = ">"
+[node name="close_cam" type="Camera3D" parent="game"]
+transform = Transform3D(0.883851, 0.25462, -0.392383, 0, 0.83886, 0.544343, 0.467757, -0.481119, 0.741428, 16.1095, 3.00005, -10.1495)
 
-[node name="top_view" type="Node3D" parent="."]
+[node name="PhantomCameraHost" type="Node" parent="game/close_cam"]
+script = ExtResource("1_xs655")
 
-[node name="toggle_view" type="Button" parent="."]
-offset_left = 315.0
-offset_top = 18.0
-offset_right = 437.0
-offset_bottom = 73.0
-text = "toggle view"
+[node name="Sprite2D" type="Sprite2D" parent="game"]
+visible = false
+position = Vector2(578.75, 324)
+scale = Vector2(1.66595, 1.4026)
+texture = ExtResource("2_1w2lv")
 
-[node name="enemy" type="Button" parent="."]
-offset_left = 275.0
-offset_top = 114.0
-offset_right = 334.0
-offset_bottom = 151.0
-text = "Spawn Enemy "
+[node name="far_cam" type="Camera3D" parent="game"]
+transform = Transform3D(1, 0, 0, 0, 0.713654, 0.700498, 0, -0.700498, 0.713654, 0, 9.91145, 17.6238)
 
-[connection signal="button_down" from="camera_path/camera_move/left" to="." method="_on_left_button_down"]
-[connection signal="button_up" from="camera_path/camera_move/left" to="." method="_on_left_button_up"]
-[connection signal="button_down" from="camera_path/camera_move/right" to="." method="_on_right_button_down"]
-[connection signal="button_up" from="camera_path/camera_move/right" to="." method="_on_right_button_up"]
-[connection signal="pressed" from="toggle_view" to="." method="_on_toggle_view_pressed"]
-[connection signal="pressed" from="enemy" to="enemy_path" method="_on_enemy_pressed"]
+[connection signal="pressed" from="top_right/pause" to="." method="_on_pause_pressed"]
+[connection signal="pressed" from="top_right/view" to="." method="_on_view_pressed"]
+[connection signal="pressed" from="game/defense_menu_view" to="." method="_on_defense_menu_view_pressed"]
+[connection signal="pressed" from="game/enemy" to="game/enemy_path" method="_on_enemy_pressed"]
+[connection signal="button_down" from="game/camera_path/view_move/left" to="." method="_on_left_button_down"]
+[connection signal="button_up" from="game/camera_path/view_move/left" to="." method="_on_left_button_up"]
+[connection signal="button_down" from="game/camera_path/view_move/right" to="." method="_on_right_button_down"]
+[connection signal="button_up" from="game/camera_path/view_move/right" to="." method="_on_right_button_up"]
