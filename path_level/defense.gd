@@ -1,6 +1,6 @@
 extends Node3D
 
-@export var turret = preload("res://grid_level/turret.tscn").instantiate()
+@export var turret = preload("res://path_level/turret.tscn").instantiate()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

@@ -1,9 +1,14 @@
 extends Node3D
 
+@export var row:int = 0:
+	set(value):
+		row = value
+	get:return row
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var level = preload("res://path_level/path_level.tscn").instantiate()
-	$level.add_child(level)
+	pass # Replace with function body.
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
