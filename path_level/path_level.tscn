@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://v0jjsyan6tqb"]
+[gd_scene load_steps=24 format=3 uid="uid://v0jjsyan6tqb"]
 
 [ext_resource type="Script" path="res://path_level/path_level.gd" id="1_drjvm"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_xs655"]
@@ -14,7 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://c31y1yft7e4v6" path="res://Assets/UI_Icon/Time_Speedx2_Button.png" id="5_kd7oa"]
 [ext_resource type="Texture2D" uid="uid://bidtxrlqm7b5k" path="res://Assets/UI_Icon/T2_Button.png" id="5_muc6y"]
 [ext_resource type="Texture2D" uid="uid://brfxkq2gqrhrl" path="res://Assets/UI_Icon/T3_Button.png" id="6_pavbx"]
-[ext_resource type="Script" path="res://path_level/defense_path.gd" id="7_0tiel"]
 [ext_resource type="Texture2D" uid="uid://cv8megrrcvmb4" path="res://Assets/UI_Icon/T4_Button.png" id="7_iqqtk"]
 [ext_resource type="Texture2D" uid="uid://dj5802m8pd7dq" path="res://Assets/UI_Icon/T5_Button.png" id="8_f5lh4"]
 
@@ -172,7 +171,7 @@ transform = Transform3D(-4.37111e-08, 0, -0.999993, 0, 0.999995, 0, 0.999993, 0,
 [node name="camera" type="Node3D" parent="camera_path/close_up_view"]
 
 [node name="PhantomCamera3D" type="Node3D" parent="camera_path/close_up_view/camera"]
-transform = Transform3D(-0.150943, -0.351317, 0.924008, 0, 0.934718, 0.355388, -0.988543, 0.0536432, -0.141089, 0, 0, 0)
+transform = Transform3D(-0.150943, -0.351317, 0.924008, 0, 0.934718, 0.355388, -0.988543, 0.0536433, -0.141089, 0, 0, 0)
 script = ExtResource("2_xe0q7")
 priority_override = false
 priority = 0
@@ -223,7 +222,7 @@ transform = Transform3D(0.906377, 0.416773, 0.0691446, -0.306559, 0.536215, 0.78
 shadow_enabled = true
 
 [node name="close_cam" type="Camera3D" parent="."]
-transform = Transform3D(0.988536, -0.0536429, 0.141088, 0, 0.934713, 0.355387, -0.150941, -0.351314, 0.924002, -17.773, 1, 15)
+transform = Transform3D(0.988536, -0.0536429, 0.141088, 0, 0.934713, 0.355386, -0.150942, -0.351314, 0.924002, -17.773, 1, 15)
 
 [node name="PhantomCameraHost" type="Node" parent="close_cam"]
 script = ExtResource("1_xs655")
@@ -234,32 +233,24 @@ transform = Transform3D(1, 0, 0, 0, 0.713654, 0.700498, 0, -0.700498, 0.713654, 
 [node name="enemy_paths" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.344551, 0)
 
-[node name="enemy_path_left" type="Path3D" parent="enemy_paths"]
+[node name="defenses" type="Node3D" parent="enemy_paths"]
+
+[node name="path_left" type="Path3D" parent="enemy_paths"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.344551, 0)
 curve = SubResource("Curve3D_du84n")
 script = ExtResource("3_nujw2")
 
-[node name="enemy_path_right" type="Path3D" parent="enemy_paths"]
+[node name="path_right" type="Path3D" parent="enemy_paths"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.344551, 0)
 curve = SubResource("Curve3D_i52y1")
 script = ExtResource("3_nujw2")
-
-[node name="defense_path_left" type="Path3D" parent="enemy_paths"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.344551, 0)
-curve = SubResource("Curve3D_du84n")
-script = ExtResource("7_0tiel")
-
-[node name="defense_path_right" type="Path3D" parent="enemy_paths"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.344551, 0)
-curve = SubResource("Curve3D_i52y1")
-script = ExtResource("7_0tiel")
 
 [node name="right_path" type="CSGPolygon3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.351924, 0)
 material_override = SubResource("StandardMaterial3D_somrm")
 polygon = PackedVector2Array(-1, -0.25, -1, -0.2, 1, -0.2, 1, -0.25)
 mode = 2
-path_node = NodePath("../enemy_paths/enemy_path_right")
+path_node = NodePath("../enemy_paths/path_right")
 path_interval_type = 0
 path_interval = 0.64
 path_simplify_angle = 0.0
@@ -274,7 +265,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.351924, 0)
 material_override = SubResource("StandardMaterial3D_somrm")
 polygon = PackedVector2Array(-1, -0.25, -1, -0.2, 1, -0.2, 1, -0.25)
 mode = 2
-path_node = NodePath("../enemy_paths/enemy_path_left")
+path_node = NodePath("../enemy_paths/path_left")
 path_interval_type = 0
 path_interval = 0.64
 path_simplify_angle = 0.0

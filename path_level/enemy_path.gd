@@ -1,21 +1,55 @@
 #@tool
 extends Path3D
 
-@export var path_seed = 0
-@export var wander_scale = 0.5
-@export var row_count = 4
-@export var road_width = 1.0
-@export var spawn_period = 2.0
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	#print(curve.get_baked_points())
-	pass # Replace with function body.
+@export var wander_scale:float = 0.5
+@export var row_count:int = 4
+@export var column_count:int = 36
+@export var defense_row_gap:float = 1.0
+@export var defense_col_spacing:float = 0.028
+@export var road_width:float = 1.0
+@export var spawn_period:float = 2.0
+@export var enemy_speed:float = 0.5
 
 var x = 0.0
 var rand = 0.0
-var spawn_index = 0
 var spawn_time = 0.0
+var spawn_index = 0
+var row_dist = []
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass
+	for i in range(row_count):row_dist.append(0)
+	
+	var path_slider = PathFollow3D.new()
+	var cursor = Node3D.new()
+	path_slider.add_child(cursor)
+	add_child(path_slider)
+	path_slider.get_child(0).position.y -= 0.2
+	
+	for column in range(column_count):
+		for row in range(row_count):
+			path_slider.progress_ratio = column*defense_col_spacing
+			var defense = preload('res://path_level/defense_spawner.tscn').instantiate()
+			defense.position = get_child(0).get_child(0).global_position
+			path_slider.get_child(0).position.x = \
+			(row*(road_width+defense_row_gap)/row_count) - (((road_width+defense_row_gap)/2) - (defense_row_gap/row_count))
+			defense.rotation = get_child(0).get_child(0).global_rotation
+			get_parent().get_child(0).add_child(defense)
+		
+	get_child(0).free()
+
+func row_selector():
+	# randomly pick a row
+	var selected_row = randi() % row_count
+	# update row_dist to show how long ago each row spawned an enemy
+	for row in range(row_count):if(row_dist[row] != 0):row_dist[row] -= 1
+
+	# if row previously spawned an enemy, pick another one
+	while(row_dist[selected_row] != 0): selected_row =  randi() % row_count
+	# update row_dist and return the new selected row
+	row_dist[selected_row] = row_count/2
+	return selected_row
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -24,13 +58,12 @@ func _process(delta):
 		var enemy_controller = PathFollow3D.new()
 		var enemy = preload('res://path_level/enemy.tscn').instantiate()
 		enemy_controller.add_child(enemy)
-		spawn_index += 1
-		enemy_controller.get_child(0).set('row', spawn_index)
+		enemy_controller.get_child(0).set('row', row_selector())
 		add_child(enemy_controller)
 	else:spawn_time+=delta
 	
 	for e in get_children():
-		e.progress += delta*1.0
+		e.progress += delta*enemy_speed
 		
 		var seed = int(e.get_child(0).get('row'))
 		rand = (seed % row_count)/2.0 - 1.0 + (road_width/row_count)

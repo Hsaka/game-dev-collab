@@ -1,9 +1,9 @@
 extends Node3D
 
+@export var defenses = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$enemy_paths/enemy_path_left.set('defense_lines', 7)
 	$far_cam.current = true
 
 @export var camera_view = true
