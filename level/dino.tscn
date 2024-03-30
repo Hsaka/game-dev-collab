@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dujhwvayaf3de"]
 
-[ext_resource type="Script" path="res://path_level/enemy.gd" id="1_ipg1s"]
+[ext_resource type="Script" path="res://level/dino.gd" id="1_275sq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t46xd"]
 albedo_color = Color(0, 0.172549, 0.631373, 1)
@@ -9,7 +9,7 @@ albedo_color = Color(0, 0.172549, 0.631373, 1)
 material = SubResource("StandardMaterial3D_t46xd")
 
 [node name="enemy" type="Node3D"]
-script = ExtResource("1_ipg1s")
+script = ExtResource("1_275sq")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.149921, 0)

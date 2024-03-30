@@ -1,21 +1,17 @@
-[gd_scene load_steps=24 format=3 uid="uid://v0jjsyan6tqb"]
+[gd_scene load_steps=20 format=3 uid="uid://v0jjsyan6tqb"]
 
-[ext_resource type="Script" path="res://path_level/path_level.gd" id="1_drjvm"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_xs655"]
-[ext_resource type="Texture2D" uid="uid://dhi520mx0c40l" path="res://UI_B.webp" id="2_1w2lv"]
-[ext_resource type="Texture2D" uid="uid://x65kpbcshwrm" path="res://Assets/UI_Icon/Time_Speedx3_Button.png" id="2_g7wtk"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3D.gd" id="2_xe0q7"]
-[ext_resource type="Script" path="res://path_level/camera_move.gd" id="3_hjnxn"]
-[ext_resource type="Script" path="res://path_level/enemy_path.gd" id="3_nujw2"]
-[ext_resource type="Texture2D" uid="uid://c6dtja0joyvsl" path="res://Assets/UI_Icon/Pause_Button.png" id="3_wh8ry"]
-[ext_resource type="Texture2D" uid="uid://bqp5acd2aor36" path="res://Assets/UI_Icon/Up_Arrow_Button.png" id="4_4qbfv"]
-[ext_resource type="Texture2D" uid="uid://bels44vudhs86" path="res://Assets/UI_Icon/T1_Button.png" id="4_5s3fy"]
-[ext_resource type="Texture2D" uid="uid://bwqh6jusvuvnb" path="res://Assets/UI_Icon/Play_Button.png" id="4_yqtqi"]
-[ext_resource type="Texture2D" uid="uid://c31y1yft7e4v6" path="res://Assets/UI_Icon/Time_Speedx2_Button.png" id="5_kd7oa"]
-[ext_resource type="Texture2D" uid="uid://bidtxrlqm7b5k" path="res://Assets/UI_Icon/T2_Button.png" id="5_muc6y"]
-[ext_resource type="Texture2D" uid="uid://brfxkq2gqrhrl" path="res://Assets/UI_Icon/T3_Button.png" id="6_pavbx"]
-[ext_resource type="Texture2D" uid="uid://cv8megrrcvmb4" path="res://Assets/UI_Icon/T4_Button.png" id="7_iqqtk"]
-[ext_resource type="Texture2D" uid="uid://dj5802m8pd7dq" path="res://Assets/UI_Icon/T5_Button.png" id="8_f5lh4"]
+[ext_resource type="Script" path="res://level/level.gd" id="1_ephvr"]
+[ext_resource type="Texture2D" uid="uid://dhi520mx0c40l" path="res://UI_B.webp" id="2_67rtb"]
+[ext_resource type="Texture2D" uid="uid://c6dtja0joyvsl" path="res://Assets/UI_Icon/Pause_Button.png" id="3_wowah"]
+[ext_resource type="Texture2D" uid="uid://bwqh6jusvuvnb" path="res://Assets/UI_Icon/Play_Button.png" id="4_orovw"]
+[ext_resource type="Texture2D" uid="uid://c31y1yft7e4v6" path="res://Assets/UI_Icon/Time_Speedx2_Button.png" id="5_iflf5"]
+[ext_resource type="Texture2D" uid="uid://x65kpbcshwrm" path="res://Assets/UI_Icon/Time_Speedx3_Button.png" id="6_8eitf"]
+[ext_resource type="Texture2D" uid="uid://bqp5acd2aor36" path="res://Assets/UI_Icon/Up_Arrow_Button.png" id="7_l68h0"]
+[ext_resource type="Script" path="res://level/camera_move.gd" id="8_opm41"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3D.gd" id="9_48mqf"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="10_mgscv"]
+[ext_resource type="Script" path="res://level/defenses.gd" id="11_gtiyw"]
+[ext_resource type="Script" path="res://level/path.gd" id="11_pt8qh"]
 
 [sub_resource type="Curve3D" id="Curve3D_1r4fn"]
 _data = {
@@ -51,20 +47,20 @@ roughness = 0.55
 
 [sub_resource type="Curve3D" id="Curve3D_uvcyf"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 3.472, 0, 0, -18.17, 0, 12.4, -3.493, 0, 0, 3.493, 0, 0, -7.302, 0, 12.4, 0, 0, 4.722, 0, 0, 0, -2.592, 0, 1.604, 0, 0, 0, 0, 0, 4.722, 2.592, 0, 1.604, -3.493, 0, 0, 3.493, 0, 0, 7.302, 0, 12.4, -3.472, 0, 0, 0, 0, 0, 18.17, 0, 12.4),
+"points": PackedVector3Array(0, 0, 0, 3.472, 0, 0, -18.17, 0, 12.4, -3.493, 0, 0, 3.493, 0, 0, -7.302, 0, 12.4, 0, 0, 4.722, 0, 0, 0, -2.592, 0, 1.604, 0, 0, 0, 0, 0, 4.722, 2.592, 0, 1.604, -4.568, 0, 0, 3.493, 0, 0, 7.302, 0, 12.4, -3.472, 0, 0, 0, 0, 0, 18.17, 0, 12.4),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
 }
 point_count = 6
 
 [node name="path_level" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.344551, 0)
-script = ExtResource("1_drjvm")
+script = ExtResource("1_ephvr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(578.75, 324)
 scale = Vector2(1.66595, 1.4026)
-texture = ExtResource("2_1w2lv")
+texture = ExtResource("2_67rtb")
 
 [node name="top_right" type="HBoxContainer" parent="."]
 anchors_preset = 1
@@ -82,19 +78,19 @@ alignment = 1
 [node name="pause" type="TextureButton" parent="top_right"]
 process_mode = 3
 layout_mode = 2
-texture_normal = ExtResource("3_wh8ry")
+texture_normal = ExtResource("3_wowah")
 
 [node name="view" type="TextureButton" parent="top_right"]
 layout_mode = 2
-texture_normal = ExtResource("4_yqtqi")
+texture_normal = ExtResource("4_orovw")
 
 [node name="remove" type="TextureButton" parent="top_right"]
 layout_mode = 2
-texture_normal = ExtResource("5_kd7oa")
+texture_normal = ExtResource("5_iflf5")
 
 [node name="TextureButton" type="TextureButton" parent="top_right"]
 layout_mode = 2
-texture_normal = ExtResource("2_g7wtk")
+texture_normal = ExtResource("6_8eitf")
 
 [node name="wave" type="RichTextLabel" parent="."]
 offset_left = 16.0
@@ -119,9 +115,9 @@ offset_bottom = 182.0
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(0.28, 0.28)
-texture_normal = ExtResource("4_4qbfv")
+texture_normal = ExtResource("7_l68h0")
 
-[node name="defenses" type="HBoxContainer" parent="."]
+[node name="defense_picker" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(0, 90)
 anchors_preset = 7
 anchor_left = 0.5
@@ -139,31 +135,11 @@ size_flags_stretch_ratio = 20.0
 theme_override_constants/separation = -2
 alignment = 1
 
-[node name="T1" type="TextureButton" parent="defenses"]
-layout_mode = 2
-texture_normal = ExtResource("4_5s3fy")
-
-[node name="T2" type="TextureButton" parent="defenses"]
-layout_mode = 2
-texture_normal = ExtResource("5_muc6y")
-
-[node name="T3" type="TextureButton" parent="defenses"]
-layout_mode = 2
-texture_normal = ExtResource("6_pavbx")
-
-[node name="T4" type="TextureButton" parent="defenses"]
-layout_mode = 2
-texture_normal = ExtResource("7_iqqtk")
-
-[node name="T5" type="TextureButton" parent="defenses"]
-layout_mode = 2
-texture_normal = ExtResource("8_f5lh4")
-
 [node name="top_view" type="Node3D" parent="."]
 
 [node name="camera_path" type="Path3D" parent="."]
 curve = SubResource("Curve3D_1r4fn")
-script = ExtResource("3_hjnxn")
+script = ExtResource("8_opm41")
 
 [node name="close_up_view" type="PathFollow3D" parent="camera_path"]
 transform = Transform3D(-4.37111e-08, 0, -0.999993, 0, 0.999995, 0, 0.999993, 0, -4.37111e-08, -17.773, 1, 15)
@@ -171,8 +147,8 @@ transform = Transform3D(-4.37111e-08, 0, -0.999993, 0, 0.999995, 0, 0.999993, 0,
 [node name="camera" type="Node3D" parent="camera_path/close_up_view"]
 
 [node name="PhantomCamera3D" type="Node3D" parent="camera_path/close_up_view/camera"]
-transform = Transform3D(-0.150943, -0.351317, 0.924008, 0, 0.934718, 0.355388, -0.988543, 0.0536433, -0.141089, 0, 0, 0)
-script = ExtResource("2_xe0q7")
+transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, 0, 0)
+script = ExtResource("9_48mqf")
 priority_override = false
 priority = 0
 follow_mode = 0
@@ -225,7 +201,7 @@ shadow_enabled = true
 transform = Transform3D(0.988536, -0.0536429, 0.141088, 0, 0.934713, 0.355386, -0.150942, -0.351314, 0.924002, -17.773, 1, 15)
 
 [node name="PhantomCameraHost" type="Node" parent="close_cam"]
-script = ExtResource("1_xs655")
+script = ExtResource("10_mgscv")
 
 [node name="far_cam" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.713654, 0.700498, 0, -0.700498, 0.713654, 0, 9.91145, 17.6238)
@@ -234,16 +210,17 @@ transform = Transform3D(1, 0, 0, 0, 0.713654, 0.700498, 0, -0.700498, 0.713654, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.344551, 0)
 
 [node name="defenses" type="Node3D" parent="enemy_paths"]
+script = ExtResource("11_gtiyw")
 
 [node name="path_left" type="Path3D" parent="enemy_paths"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.344551, 0)
 curve = SubResource("Curve3D_du84n")
-script = ExtResource("3_nujw2")
+script = ExtResource("11_pt8qh")
 
 [node name="path_right" type="Path3D" parent="enemy_paths"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.344551, 0)
 curve = SubResource("Curve3D_i52y1")
-script = ExtResource("3_nujw2")
+script = ExtResource("11_pt8qh")
 
 [node name="right_path" type="CSGPolygon3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.351924, 0)

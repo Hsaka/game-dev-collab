@@ -1,4 +1,3 @@
-#@tool
 extends Path3D
 
 @export var wander_scale:float = 0.5
@@ -18,7 +17,6 @@ var row_dist = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
 	for i in range(row_count):row_dist.append(0)
 	
 	var path_slider = PathFollow3D.new()
@@ -30,7 +28,7 @@ func _ready():
 	for column in range(column_count):
 		for row in range(row_count):
 			path_slider.progress_ratio = column*defense_col_spacing
-			var defense = preload('res://path_level/defense_spawner.tscn').instantiate()
+			var defense = preload('res://level/defense_spawner.tscn').instantiate()
 			defense.position = get_child(0).get_child(0).global_position
 			path_slider.get_child(0).position.x = \
 			(row*(road_width+defense_row_gap)/row_count) - (((road_width+defense_row_gap)/2) - (defense_row_gap/row_count))
@@ -56,7 +54,7 @@ func _process(delta):
 	if (spawn_time > 1.0):
 		spawn_time = 0.0
 		var enemy_controller = PathFollow3D.new()
-		var enemy = preload('res://path_level/enemy.tscn').instantiate()
+		var enemy = preload('res://level/dino.tscn').instantiate()
 		enemy_controller.add_child(enemy)
 		enemy_controller.get_child(0).set('row', row_selector())
 		add_child(enemy_controller)

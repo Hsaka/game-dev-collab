@@ -1,10 +1,19 @@
 extends Node3D
 
-@export var defenses = []
+@export var defenses = [1, 2, 3, 4, 5]
+
+func spawn_defense(type):
+	for defense in $enemy_paths/defenses.get_children():
+		defense.set('gen', type)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$far_cam.current = true
+	for defense in defenses:
+		var button = TextureButton.new()
+		button.texture_normal = load('res://Assets/UI_Icon/T'+str(defense)+'.png')
+		button.pressed.connect(func():spawn_defense(defense))
+		$defense_picker.add_child(button)
 
 @export var camera_view = true
 const camera_speed = 0.005
@@ -14,12 +23,8 @@ var pause = 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	$camera_path/close_up_view.progress_ratio += direction*camera_speed
-	$camera/camera_path/camera_follow.progress_ratio += direction*camera_speed
-	
-	# move camera target
-	#for path in get_node("enemy_paths").get_children():
-		#path.get_child(0).progress_ratio += direction*camera_speed
+	$camera_path/close_up_view.progress_ratio += direction*camera_speed    # move camera
+	$camera/camera_path/camera_follow.progress_ratio += direction*camera_speed    # move camera's target
 
 func _on_left_button_down():direction += 1
 func _on_left_button_up():direction -= 1
@@ -36,21 +41,12 @@ func _on_texture_button_pressed():
 	if($close_cam.current):toggle_view(true)
 	else:toggle_view(false)
 
-func _on_defense_menu_view_pressed():
-	if($defenses.visible):
-		$defenses.visible = false
-		$defense_menu_view.position.y += 100
-	else:
-		$defenses.visible = true
-		$defense_menu_view.position.y -= 100
-
-
 func _on_defense_menu_view_2_pressed():
-	if($defenses.visible):
-		$defenses.visible = false
+	if($defense_picker.visible):
+		$defense_picker.visible = false
 		$defense_menu_view.position.y += 100
 	else:
-		$defenses.visible = true
+		$defense_picker.visible = true
 		$defense_menu_view.position.y -= 100
 
 func pause_button():get_tree().paused = !get_tree().paused
