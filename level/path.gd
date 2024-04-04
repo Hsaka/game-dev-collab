@@ -55,6 +55,7 @@ func _process(delta):
 		spawn_time = 0.0
 		var enemy_controller = PathFollow3D.new()
 		var enemy = preload('res://level/dino.tscn').instantiate()
+		enemy.scale = Vector3(0.3, 0.3, 0.3)
 		enemy_controller.add_child(enemy)
 		enemy_controller.get_child(0).set('row', row_selector())
 		add_child(enemy_controller)

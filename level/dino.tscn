@@ -1,16 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dujhwvayaf3de"]
+[gd_scene load_steps=3 format=3 uid="uid://dujhwvayaf3de"]
 
 [ext_resource type="Script" path="res://level/dino.gd" id="1_275sq"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t46xd"]
-albedo_color = Color(0, 0.172549, 0.631373, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_oa5ph"]
-material = SubResource("StandardMaterial3D_t46xd")
+[ext_resource type="PackedScene" uid="uid://goyi3aknyf12" path="res://Assets/3d_Mesh/Dinos/Dino_A/Dino_A.glb" id="2_j2t0u"]
 
 [node name="enemy" type="Node3D"]
 script = ExtResource("1_275sq")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.149921, 0)
-mesh = SubResource("BoxMesh_oa5ph")
+[node name="Dino_A2" parent="." instance=ExtResource("2_j2t0u")]
+transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, 0, 0, 0)

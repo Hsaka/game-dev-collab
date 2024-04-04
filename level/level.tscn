@@ -147,7 +147,7 @@ transform = Transform3D(-4.37111e-08, 0, -0.999993, 0, 0.999995, 0, 0.999993, 0,
 [node name="camera" type="Node3D" parent="camera_path/close_up_view"]
 
 [node name="PhantomCamera3D" type="Node3D" parent="camera_path/close_up_view/camera"]
-transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, 0, 0)
+transform = Transform3D(-0.150943, -0.351317, 0.924008, 0, 0.934718, 0.355388, -0.988543, 0.0536433, -0.141089, 0, 0, 0)
 script = ExtResource("9_48mqf")
 priority_override = false
 priority = 0
