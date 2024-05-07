@@ -1,10 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://dujhwvayaf3de"]
+[gd_scene load_steps=5 format=3 uid="uid://dujhwvayaf3de"]
 
 [ext_resource type="Script" path="res://level/dino.gd" id="1_275sq"]
-[ext_resource type="PackedScene" uid="uid://goyi3aknyf12" path="res://Assets/3d_Mesh/Dinos/Dino_A/Dino_A.glb" id="2_j2t0u"]
+[ext_resource type="PackedScene" uid="uid://cby1o8syxweth" path="res://Assets/3d_Mesh/Dinos/Dino_A/dino_a.tscn" id="2_qpyil"]
+[ext_resource type="PackedScene" uid="uid://g35x2tqqgrkh" path="res://Assets/3d_Mesh/Dinos/Dino_B/Dino_B.glb" id="3_lpnx8"]
+[ext_resource type="PackedScene" uid="uid://egc78seawy8r" path="res://Assets/3d_Mesh/Dinos/Dino_C/Dino_C.glb" id="4_7h1vy"]
 
 [node name="enemy" type="Node3D"]
 script = ExtResource("1_275sq")
 
-[node name="Dino_A2" parent="." instance=ExtResource("2_j2t0u")]
-transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, 0, 0, 0)
+[node name="Dino_A" parent="." instance=ExtResource("2_qpyil")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+visible = false
+
+[node name="Dino_B" parent="." instance=ExtResource("3_lpnx8")]
+transform = Transform3D(-1.09278e-08, 0, 0.25, 0, 0.25, 0, -0.25, 0, -1.09278e-08, 0, 0, 0)
+visible = false
+
+[node name="Dino_C" parent="." instance=ExtResource("4_7h1vy")]
+transform = Transform3D(-1.31134e-08, 0, 0.3, 0, 0.3, 0, -0.3, 0, -1.31134e-08, 0, 0.511996, 0)
+visible = false

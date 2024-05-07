@@ -4,6 +4,12 @@ extends Node3D
 	set(value):
 		row = value
 	get:return row
+	
+@export var dino:int = 0:
+	set(dino):
+		dino = dino
+		get_children()[dino].visible = true
+	get:return dino
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

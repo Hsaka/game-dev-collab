@@ -49,12 +49,21 @@ func row_selector():
 	row_dist[selected_row] = row_count/2
 	return selected_row
 
+func dino_select(index):
+	if not bool(index % 9):return 2
+	elif not bool(index % 4):return 1
+	else:return 0
+
+var dino_index = 0
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if (spawn_time > 1.0):
 		spawn_time = 0.0
 		var enemy_controller = PathFollow3D.new()
 		var enemy = preload('res://level/dino.tscn').instantiate()
+		enemy.set('dino', dino_select(dino_index))
+		dino_index += 1		
 		enemy.scale = Vector3(0.3, 0.3, 0.3)
 		enemy_controller.add_child(enemy)
 		enemy_controller.get_child(0).set('row', row_selector())
