@@ -2,18 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dk2qi1a8b27jm"
-path.s3tc="res://.godot/imported/Dino_A_Dino_A_Texture.png-f7c56243c181f3db8f0a35d2d74956ff.s3tc.ctex"
+uid="uid://xb1lnbqyp8dt"
+path.s3tc="res://.godot/imported/Dino_B_Texture.png-86ebb74643b6cf590a6dc5f91613b05a.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
-generator_parameters={}
+generator_parameters={
+"md5": "c1d25e5ae7c777797f29ab6aa9085eb9"
+}
 
 [deps]
 
-source_file="res://Assets/3d_Mesh/Dinos/Dino_A/Dino_A_Dino_A_Texture.png"
-dest_files=["res://.godot/imported/Dino_A_Dino_A_Texture.png-f7c56243c181f3db8f0a35d2d74956ff.s3tc.ctex"]
+source_file="res://Assets/3d_Mesh/Dinos/Dino_B/Dino_B_Texture.png"
+dest_files=["res://.godot/imported/Dino_B_Texture.png-86ebb74643b6cf590a6dc5f91613b05a.s3tc.ctex"]
 
 [params]
 
