@@ -1,22 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dbte4iwvdqq4l"]
+[gd_scene load_steps=2 format=3 uid="uid://dbte4iwvdqq4l"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_6fxlk"]
-size = Vector3(0.5, 1, 0.5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_kkqrp"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_badgb"]
-albedo_color = Color(0, 1, 1, 1)
+[ext_resource type="PackedScene" uid="uid://u1g7qoqxsth2" path="res://Assets/3d_Mesh/Defense_Units/Aad_Canon/bubble_gum_aad.tscn" id="1_jth5w"]
 
 [node name="turret" type="Node3D"]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0.25, 0)
-shape = SubResource("BoxShape3D_6fxlk")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("BoxMesh_kkqrp")
-surface_material_override/0 = SubResource("StandardMaterial3D_badgb")
+[node name="BubbleGum_AAD" parent="." instance=ExtResource("1_jth5w")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)

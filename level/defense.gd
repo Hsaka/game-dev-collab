@@ -1,5 +1,9 @@
 extends Node3D
 
+var active:bool = false
+@export var row = 0
+@export var col = 0
+@export var path_number = 0
 @export var gen:int = 0:
 	set(i):
 		if(bool(i)and not active):
@@ -7,8 +11,6 @@ extends Node3D
 			gen = i
 		else:$Area3D.visible = false
 	get:return gen
-			
-var active:bool = false
 
 @export var defenses = [
 preload("res://level/defenses/1.tscn"),
@@ -30,6 +32,5 @@ func _process(delta):
 
 func _on_area_3d_input_event(camera, event, position, normal, shape_idx):
 	if event is InputEventMouseButton and event.pressed:
-		print(gen)
 		$defense.add_child(defenses[gen-1].instantiate())
-		get_parent().hide.emit()
+		get_parent().hide.emit(row, col, path_number)

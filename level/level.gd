@@ -1,6 +1,8 @@
 extends Node3D
 
 @export var defenses = [1, 2, 3, 4, 5]
+@export var row_count = 4
+@export var column_count = 36
 
 func spawn_defense(type):
 	for defense in $enemy_paths/defenses.get_children():
@@ -14,6 +16,9 @@ func _ready():
 		button.texture_normal = load('res://Assets/UI_Icon/T'+str(defense)+'.png')
 		button.pressed.connect(func():spawn_defense(defense))
 		$defense_picker.add_child(button)
+		
+	for path in range(1, len($enemy_paths.get_children())):
+		$enemy_paths.get_child(path).set('path_number', path)
 
 @export var camera_view = true
 const camera_speed = 0.005
@@ -33,12 +38,12 @@ func _on_right_button_up():direction += 1
 
 func toggle_view(mode):
 	$far_cam.current = mode
-	$close_cam.current = !mode
+	$camera_path/close_up_view/camera/Camera3D.current = !mode
 	$camera_path/view_move.visible = !mode
 	$camera_path/view_move.set_process(!mode)
 	
 func _on_texture_button_pressed():
-	if($close_cam.current):toggle_view(true)
+	if($camera_path/close_up_view/camera/Camera3D.current):toggle_view(true)
 	else:toggle_view(false)
 
 func _on_defense_menu_view_2_pressed():

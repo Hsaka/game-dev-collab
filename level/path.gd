@@ -4,7 +4,7 @@ extends Path3D
 @export var row_count:int = 4
 @export var column_count:int = 36
 @export var defense_row_gap:float = 1.0
-@export var defense_col_spacing:float = 0.028
+@export var defense_col_spacing:float = 1.0
 @export var road_width:float = 1.0
 @export var spawn_period:float = 2.0
 @export var enemy_speed:float = 0.5
@@ -14,28 +14,40 @@ var rand = 0.0
 var spawn_time = 0.0
 var spawn_index = 0
 var row_dist = []
+var dino_rows = []
+
+@export var path_number = 0:
+	set(n):
+		path_number = n
+		var path_slider = PathFollow3D.new()
+		var cursor = Node3D.new()
+		path_slider.add_child(cursor)
+		add_child(path_slider)
+		path_slider.get_child(0).position.y -= 0.2
+		
+		for column in range(column_count):
+			for row in range(row_count):
+				path_slider.progress_ratio = column*defense_col_spacing
+				var defense = preload('res://level/defense_spawner.tscn').instantiate()
+				defense.position = get_child(0).get_child(0).global_position
+				path_slider.get_child(0).position.x = \
+				(row*(road_width+defense_row_gap)/row_count) - (((road_width+defense_row_gap)/2) - (defense_row_gap/row_count))
+				defense.rotation = get_child(0).get_child(0).global_rotation
+				defense.set('row', row)
+				defense.set('col', column)
+				defense.set('path_number', path_number)
+				get_parent().get_child(0).add_child(defense)
+			
+		get_child(0).free()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	for i in range(row_count):row_dist.append(0)
-	
-	var path_slider = PathFollow3D.new()
-	var cursor = Node3D.new()
-	path_slider.add_child(cursor)
-	add_child(path_slider)
-	path_slider.get_child(0).position.y -= 0.2
-	
-	for column in range(column_count):
-		for row in range(row_count):
-			path_slider.progress_ratio = column*defense_col_spacing
-			var defense = preload('res://level/defense_spawner.tscn').instantiate()
-			defense.position = get_child(0).get_child(0).global_position
-			path_slider.get_child(0).position.x = \
-			(row*(road_width+defense_row_gap)/row_count) - (((road_width+defense_row_gap)/2) - (defense_row_gap/row_count))
-			defense.rotation = get_child(0).get_child(0).global_rotation
-			get_parent().get_child(0).add_child(defense)
-		
-	get_child(0).free()
+	row_count = get_parent().get_parent().get('row_count')
+	column_count = get_parent().get_parent().get('column_count')
+	defense_col_spacing = 1.0/column_count
+	for i in range(row_count):
+		row_dist.append(0)
+		dino_rows.append([])
 
 func row_selector():
 	# randomly pick a row
@@ -50,8 +62,8 @@ func row_selector():
 	return selected_row
 
 func dino_select(index):
-	if not bool(index % 9):return 2
-	elif not bool(index % 4):return 1
+	if not bool(index % 25):return 1
+	elif not bool(index % 4):return 2
 	else:return 0
 
 var dino_index = 0
@@ -62,16 +74,26 @@ func _process(delta):
 		spawn_time = 0.0
 		var enemy_controller = PathFollow3D.new()
 		var enemy = preload('res://level/dino.tscn').instantiate()
-		enemy.set('dino', dino_select(dino_index))
+		var row = dino_select(dino_index)
+		enemy.set('dino', row)
 		dino_index += 1		
 		enemy.scale = Vector3(0.3, 0.3, 0.3)
 		enemy_controller.add_child(enemy)
 		enemy_controller.get_child(0).set('row', row_selector())
 		add_child(enemy_controller)
+		dino_rows[row].append(enemy_controller)
 	else:spawn_time+=delta
 	
 	for e in get_children():
-		e.progress += delta*enemy_speed
+		e.progress += delta*e.get_child(0).get('speed')
+		var defenses = get_parent().get_child(0).get('defenses')[path_number-1]
+		var dino_row = (e.get_child(0).get('row')+1) % row_count
+		var dino = e.get_child(0)
+		
+		if(len(defenses[dino_row]) == 0):pass
+		elif(e.progress_ratio >= float(defenses[dino_row][e.get_child(0).get('obstacle_index')]-
+			dino.get('front')) / float(column_count)):e.get_child(0).set('speed', 0)
+		else:e.get_child(0).set('speed', e.get_child(0).get('walk_speed'))
 		
 		var seed = int(e.get_child(0).get('row'))
 		rand = (seed % row_count)/2.0 - 1.0 + (road_width/row_count)
@@ -85,4 +107,4 @@ func _process(delta):
 			((cos(x)/10) + (2.77*cos(2.77*x)/18))*-114.59*wander_scale,
 			0)
 			
-		if(e.progress > 23):e.queue_free()
+		if(e.progress_ratio >= 1.0):e.queue_free()
