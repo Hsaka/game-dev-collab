@@ -16,7 +16,7 @@ func _ready():
 	
 	# hide all spawners when signal is detected
 	hide.connect(func(row, col, path_number):
-		print(defenses)
+		get_parent().get_child(path_number).set('defenses', [row, col])
 		defenses[path_number-1][row].append(col)
 		defenses[path_number-1][row].sort()
 		for s in get_children():s.set('gen', 0)

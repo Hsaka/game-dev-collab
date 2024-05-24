@@ -1,7 +1,11 @@
 extends Node3D
 
+@export var spawn_index = 0
 @export var health:int = 10
-@export var obstacle_index = 0
+@export var obstacle_index = 0:
+	set(i):
+		obstacle_index = i
+		print(i, '    ', spawn_index)
 @export var row:int = 0
 @export var path_number = 0
 

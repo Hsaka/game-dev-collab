@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://v0jjsyan6tqb"]
+[gd_scene load_steps=26 format=3 uid="uid://v0jjsyan6tqb"]
 
 [ext_resource type="Script" path="res://level/level.gd" id="1_ephvr"]
 [ext_resource type="Texture2D" uid="uid://dhi520mx0c40l" path="res://UI_B.webp" id="2_67rtb"]
@@ -8,8 +8,16 @@
 [ext_resource type="Texture2D" uid="uid://x65kpbcshwrm" path="res://Assets/UI_Icon/Time_Speedx3_Button.png" id="6_8eitf"]
 [ext_resource type="Texture2D" uid="uid://bqp5acd2aor36" path="res://Assets/UI_Icon/Up_Arrow_Button.png" id="7_l68h0"]
 [ext_resource type="Script" path="res://level/camera_move.gd" id="8_opm41"]
+[ext_resource type="PackedScene" uid="uid://yq85udbxdgui" path="res://Assets/3d_Mesh/Environment/Building001.glb" id="11_0ct7y"]
 [ext_resource type="Script" path="res://level/defenses.gd" id="11_gtiyw"]
 [ext_resource type="Script" path="res://level/path.gd" id="11_pt8qh"]
+[ext_resource type="PackedScene" uid="uid://0xpk75ukefyj" path="res://Assets/3d_Mesh/Environment/Building.glb" id="12_2xk5y"]
+[ext_resource type="PackedScene" uid="uid://crjgdwm4dv8ut" path="res://Assets/3d_Mesh/Environment/Gate1.glb" id="13_n683t"]
+[ext_resource type="PackedScene" uid="uid://cl781lyxqbus6" path="res://testing/gate_2.tscn" id="14_64ehy"]
+[ext_resource type="PackedScene" uid="uid://bnvxr840skrb8" path="res://Assets/3d_Mesh/Environment/Gate.glb" id="15_xio0c"]
+[ext_resource type="PackedScene" uid="uid://c7w3caj4rq8cd" path="res://Assets/3d_Mesh/Environment/WallDef1.glb" id="16_t7wqk"]
+[ext_resource type="PackedScene" uid="uid://c626auj3wr7vv" path="res://Assets/3d_Mesh/Environment/WallDef.glb" id="17_e1y1b"]
+[ext_resource type="PackedScene" uid="uid://b2npxlf5giweo" path="res://testing/gate_3.tscn" id="18_0xke8"]
 
 [sub_resource type="Curve3D" id="Curve3D_1r4fn"]
 _data = {
@@ -242,6 +250,44 @@ curve = SubResource("Curve3D_uvcyf")
 transform = Transform3D(-4.37107e-08, 0, -0.999985, 0, 1, 0, 0.999985, 0, -4.37107e-08, -18.17, 0, 12.4)
 
 [node name="target" type="Node3D" parent="camera/camera_path/camera_follow"]
+
+[node name="door" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.250757, 23.5787)
+
+[node name="Building001" parent="door" instance=ExtResource("11_0ct7y")]
+
+[node name="Building2" parent="door" instance=ExtResource("12_2xk5y")]
+
+[node name="Gate1" parent="door" instance=ExtResource("13_n683t")]
+
+[node name="Gate2" parent="door" instance=ExtResource("14_64ehy")]
+
+[node name="Gate4" parent="door" instance=ExtResource("15_xio0c")]
+
+[node name="WallDef1" parent="door" instance=ExtResource("16_t7wqk")]
+
+[node name="WallDef" parent="door" instance=ExtResource("17_e1y1b")]
+
+[node name="Gate3" parent="door" instance=ExtResource("18_0xke8")]
+
+[node name="door2" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.250757, 23.5787)
+
+[node name="Building001" parent="door2" instance=ExtResource("11_0ct7y")]
+
+[node name="Building2" parent="door2" instance=ExtResource("12_2xk5y")]
+
+[node name="Gate1" parent="door2" instance=ExtResource("13_n683t")]
+
+[node name="Gate2" parent="door2" instance=ExtResource("14_64ehy")]
+
+[node name="Gate4" parent="door2" instance=ExtResource("15_xio0c")]
+
+[node name="WallDef1" parent="door2" instance=ExtResource("16_t7wqk")]
+
+[node name="WallDef" parent="door2" instance=ExtResource("17_e1y1b")]
+
+[node name="Gate3" parent="door2" instance=ExtResource("18_0xke8")]
 
 [connection signal="pressed" from="top_right/pause" to="." method="pause_button"]
 [connection signal="pressed" from="top_right/view" to="." method="_on_texture_button_pressed"]

@@ -16,6 +16,17 @@ var spawn_index = 0
 var row_dist = []
 var dino_rows = []
 
+@export var defenses = [[],[],[],[]]:
+	set(position):
+		defense_update(position)
+
+func defense_update(position):
+	defenses[position[0]].append(position[1])
+	defenses[position[0]].sort()
+	for dino in dino_rows[position[0]]:
+		if(dino.progress_ratio > float(position[1]) / float(column_count)):
+			dino.get_child(0).set('obstacle_index', dino.get_child(0).get('obstacle_index')+1)
+
 @export var path_number = 0:
 	set(n):
 		path_number = n
@@ -80,30 +91,35 @@ func _process(delta):
 		enemy.scale = Vector3(0.3, 0.3, 0.3)
 		enemy_controller.add_child(enemy)
 		enemy_controller.get_child(0).set('row', row_selector())
+		enemy_controller.get_child(0).set('spawn_index', dino_index)
 		add_child(enemy_controller)
 		dino_rows[row].append(enemy_controller)
 	else:spawn_time+=delta
 	
 	for e in get_children():
-		e.progress += delta*e.get_child(0).get('speed')
-		var defenses = get_parent().get_child(0).get('defenses')[path_number-1]
-		var dino_row = (e.get_child(0).get('row')+1) % row_count
 		var dino = e.get_child(0)
+		e.progress += delta*dino.get('speed')
+		var defenses = get_parent().get_child(0).get('defenses')[path_number-1]
+		var dino_row = (dino.get('row')+1) % row_count
 		
-		if(len(defenses[dino_row]) == 0):pass
-		elif(e.progress_ratio >= float(defenses[dino_row][e.get_child(0).get('obstacle_index')]-
-			dino.get('front')) / float(column_count)):e.get_child(0).set('speed', 0)
-		else:e.get_child(0).set('speed', e.get_child(0).get('walk_speed'))
+		if(dino.get('obstacle_index') >= len(defenses[dino_row])):pass
+		elif(e.progress_ratio >=
+			float(defenses[dino_row][dino.get('obstacle_index')]-dino.get('front')) / float(column_count)):
+				if(e.progress_ratio >
+					float(defenses[dino_row][dino.get('obstacle_index')]) / float(column_count)):
+						dino.set('obstacle_index', dino.get('obstacle_index')+1)
+				else:dino.set('speed', 0)
+		elif(0):dino.set('speed', dino.get('walk_speed'))
 		
-		var seed = int(e.get_child(0).get('row'))
+		var seed = int(dino.get('row'))
 		rand = (seed % row_count)/2.0 - 1.0 + (road_width/row_count)
-		x = e.progress + e.get_child(0).get('row')**2
-		e.get_child(0).position = Vector3(rand + (wander_scale*
+		x = e.progress + dino.get('row')**2
+		dino.position = Vector3(rand + (wander_scale*
 			sin(x)/10 +
 			sin(2.77*x)/18),
 			-0.20, 0)
 		
-		e.get_child(0).rotation_degrees = Vector3(0,
+		dino.rotation_degrees = Vector3(0,
 			((cos(x)/10) + (2.77*cos(2.77*x)/18))*-114.59*wander_scale,
 			0)
 			

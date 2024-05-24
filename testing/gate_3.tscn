@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2npxlf5giweo"]
+
+[ext_resource type="PackedScene" uid="uid://dwbnv6nme7a68" path="res://Assets/3d_Mesh/Environment/Gate3.glb" id="1_m65s0"]
+[ext_resource type="Shader" path="res://door.gdshader" id="2_bx1f1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qm1ba"]
+render_priority = 0
+shader = ExtResource("2_bx1f1")
+shader_parameter/randomness = 13.0
+
+[node name="Gate3" instance=ExtResource("1_m65s0")]
+
+[node name="Gate_003" parent="." index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_qm1ba")
