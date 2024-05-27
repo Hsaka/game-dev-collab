@@ -251,43 +251,45 @@ transform = Transform3D(-4.37107e-08, 0, -0.999985, 0, 1, 0, 0.999985, 0, -4.371
 
 [node name="target" type="Node3D" parent="camera/camera_path/camera_follow"]
 
-[node name="door" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.250757, 23.5787)
+[node name="background" type="Node3D" parent="."]
+transform = Transform3D(-0.5, 0, 0, 0, 0.5, -4.37114e-08, 0, 4.37114e-08, 0.5, 0, -0.250757, 12.0601)
 
-[node name="Building001" parent="door" instance=ExtResource("11_0ct7y")]
+[node name="door2" type="Node3D" parent="background"]
 
-[node name="Building2" parent="door" instance=ExtResource("12_2xk5y")]
+[node name="Building001" parent="background/door2" instance=ExtResource("11_0ct7y")]
 
-[node name="Gate1" parent="door" instance=ExtResource("13_n683t")]
+[node name="Building2" parent="background/door2" instance=ExtResource("12_2xk5y")]
 
-[node name="Gate2" parent="door" instance=ExtResource("14_64ehy")]
+[node name="Gate1" parent="background/door2" instance=ExtResource("13_n683t")]
 
-[node name="Gate4" parent="door" instance=ExtResource("15_xio0c")]
+[node name="Gate2" parent="background/door2" instance=ExtResource("14_64ehy")]
 
-[node name="WallDef1" parent="door" instance=ExtResource("16_t7wqk")]
+[node name="Gate4" parent="background/door2" instance=ExtResource("15_xio0c")]
 
-[node name="WallDef" parent="door" instance=ExtResource("17_e1y1b")]
+[node name="WallDef1" parent="background/door2" instance=ExtResource("16_t7wqk")]
 
-[node name="Gate3" parent="door" instance=ExtResource("18_0xke8")]
+[node name="WallDef" parent="background/door2" instance=ExtResource("17_e1y1b")]
 
-[node name="door2" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.250757, 23.5787)
+[node name="Gate3" parent="background/door2" instance=ExtResource("18_0xke8")]
 
-[node name="Building001" parent="door2" instance=ExtResource("11_0ct7y")]
+[node name="door" type="Node3D" parent="background"]
+transform = Transform3D(-1, 0, 0, 0, 1, 8.74228e-08, 0, -8.74228e-08, 1, 0, 0, 0)
 
-[node name="Building2" parent="door2" instance=ExtResource("12_2xk5y")]
+[node name="Building001" parent="background/door" instance=ExtResource("11_0ct7y")]
 
-[node name="Gate1" parent="door2" instance=ExtResource("13_n683t")]
+[node name="Building2" parent="background/door" instance=ExtResource("12_2xk5y")]
 
-[node name="Gate2" parent="door2" instance=ExtResource("14_64ehy")]
+[node name="Gate1" parent="background/door" instance=ExtResource("13_n683t")]
 
-[node name="Gate4" parent="door2" instance=ExtResource("15_xio0c")]
+[node name="Gate2" parent="background/door" instance=ExtResource("14_64ehy")]
 
-[node name="WallDef1" parent="door2" instance=ExtResource("16_t7wqk")]
+[node name="Gate4" parent="background/door" instance=ExtResource("15_xio0c")]
 
-[node name="WallDef" parent="door2" instance=ExtResource("17_e1y1b")]
+[node name="WallDef1" parent="background/door" instance=ExtResource("16_t7wqk")]
 
-[node name="Gate3" parent="door2" instance=ExtResource("18_0xke8")]
+[node name="WallDef" parent="background/door" instance=ExtResource("17_e1y1b")]
+
+[node name="Gate3" parent="background/door" instance=ExtResource("18_0xke8")]
 
 [connection signal="pressed" from="top_right/pause" to="." method="pause_button"]
 [connection signal="pressed" from="top_right/view" to="." method="_on_texture_button_pressed"]

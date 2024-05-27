@@ -8,6 +8,7 @@ extends Path3D
 @export var road_width:float = 1.0
 @export var spawn_period:float = 2.0
 @export var enemy_speed:float = 0.5
+@export var process_count = 0
 
 var x = 0.0
 var rand = 0.0
@@ -23,9 +24,6 @@ var dino_rows = []
 func defense_update(position):
 	defenses[position[0]].append(position[1])
 	defenses[position[0]].sort()
-	for dino in dino_rows[position[0]]:
-		if(dino.progress_ratio > float(position[1]) / float(column_count)):
-			dino.get_child(0).set('obstacle_index', dino.get_child(0).get('obstacle_index')+1)
 
 @export var path_number = 0:
 	set(n):
@@ -81,13 +79,14 @@ var dino_index = 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	process_count += 1
 	if (spawn_time > 1.0):
 		spawn_time = 0.0
 		var enemy_controller = PathFollow3D.new()
 		var enemy = preload('res://level/dino.tscn').instantiate()
 		var row = dino_select(dino_index)
 		enemy.set('dino', row)
-		dino_index += 1		
+		dino_index += 1
 		enemy.scale = Vector3(0.3, 0.3, 0.3)
 		enemy_controller.add_child(enemy)
 		enemy_controller.get_child(0).set('row', row_selector())
@@ -102,14 +101,18 @@ func _process(delta):
 		var defenses = get_parent().get_child(0).get('defenses')[path_number-1]
 		var dino_row = (dino.get('row')+1) % row_count
 		
-		if(dino.get('obstacle_index') >= len(defenses[dino_row])):pass
+		if(dino.get('obstacle_index') >= len(defenses[dino_row])):
+			dino.set('speed', dino.get('walk_speed'))
 		elif(e.progress_ratio >=
-			float(defenses[dino_row][dino.get('obstacle_index')]-dino.get('front')) / float(column_count)):
+			float(defenses[dino_row][dino.get('obstacle_index')].get('col')-dino.get('front')) / float(column_count)):
 				if(e.progress_ratio >
-					float(defenses[dino_row][dino.get('obstacle_index')]) / float(column_count)):
+					float(defenses[dino_row][dino.get('obstacle_index')].get('col')) / float(column_count)):
 						dino.set('obstacle_index', dino.get('obstacle_index')+1)
+				elif(dino.get('speed') == 0):
+					if(process_count % dino.get('attack_period')):
+						var obstacle = defenses[dino_row][dino.get('obstacle_index')]
+						obstacle.set('health', obstacle.get('health')-dino.get('attack_damage'))
 				else:dino.set('speed', 0)
-		elif(0):dino.set('speed', dino.get('walk_speed'))
 		
 		var seed = int(dino.get('row'))
 		rand = (seed % row_count)/2.0 - 1.0 + (road_width/row_count)
