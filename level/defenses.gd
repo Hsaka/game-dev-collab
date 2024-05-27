@@ -26,9 +26,11 @@ func _ready():
 	
 	remove.connect(func(row, path_number, defense):
 		var column = defenses[path_number-1][row]
+		print(defenses[path_number-1][row])
 		for d in range(column.size()):
 			if(column[d].get('col')==defense.get('col')):
 				defenses[path_number-1][row].remove_at(d)
+				break
 		)
 
 

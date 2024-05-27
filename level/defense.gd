@@ -9,7 +9,7 @@ var active:bool = false
 		health=x
 		if(health<=0):
 			get_parent().remove.emit(row, path_number, self)
-			$defense.visible = false
+			$defense.get_child(0).queue_free()
 @export var gen:int = 0:
 	set(i):
 		if(bool(i)and not active):

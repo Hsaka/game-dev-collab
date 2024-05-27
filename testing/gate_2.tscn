@@ -1,12 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cl781lyxqbus6"]
+[gd_scene load_steps=3 format=3 uid="uid://cl781lyxqbus6"]
 
 [ext_resource type="PackedScene" uid="uid://b2gt3r4qp6g13" path="res://Assets/3d_Mesh/Environment/Gate2.glb" id="1_sj3d5"]
-[ext_resource type="Shader" path="res://door.gdshader" id="2_jsuo0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_surju"]
-render_priority = 0
-shader = ExtResource("2_jsuo0")
-shader_parameter/randomness = 10.0
 
 [node name="Gate2" instance=ExtResource("1_sj3d5")]
 

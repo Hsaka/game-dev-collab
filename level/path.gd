@@ -101,9 +101,7 @@ func _process(delta):
 		var defenses = get_parent().get_child(0).get('defenses')[path_number-1]
 		var dino_row = (dino.get('row')+1) % row_count
 		
-		if(dino.get('obstacle_index') >= len(defenses[dino_row])):
-			dino.set('speed', dino.get('walk_speed'))
-		elif(e.progress_ratio >=
+		if(dino.get('obstacle_index') < len(defenses[dino_row]) and e.progress_ratio >=
 			float(defenses[dino_row][dino.get('obstacle_index')].get('col')-dino.get('front')) / float(column_count)):
 				if(e.progress_ratio >
 					float(defenses[dino_row][dino.get('obstacle_index')].get('col')) / float(column_count)):
@@ -113,6 +111,7 @@ func _process(delta):
 						var obstacle = defenses[dino_row][dino.get('obstacle_index')]
 						obstacle.set('health', obstacle.get('health')-dino.get('attack_damage'))
 				else:dino.set('speed', 0)
+		else:dino.set('speed', dino.get('walk_speed'))
 		
 		var seed = int(dino.get('row'))
 		rand = (seed % row_count)/2.0 - 1.0 + (road_width/row_count)
